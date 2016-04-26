@@ -28,12 +28,26 @@ class OrdersController < ApplicationController
     @order.buyer_id = current_user.id
     @order.seller_id = @seller.id
 
+    Stripe.api_key = ENV["STRIPE_API_KEY"]
+    token = params[:stripeToken]
+
+    begin
+      charge = Stripe::Charge.create(
+        :amount => (@listing.price * 100).floor,
+        :currency => "krw",
+        :card => token
+        )
+      flash[:notice] = "주문 감사합니다!"
+    rescue
+      flash[:danger] = e.message
+    end
+
     respond_to do |format|
       if @order.save
         format.html { redirect_to root_url, notice: '성공적으로 주문하였습니다.' }
-        format.json { render :show, status: :created, location: @order }
+        format.json { render action: 'show', status: :created, location: @order }
       else
-        format.html { render :new }
+        format.html { render action: 'new' }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
