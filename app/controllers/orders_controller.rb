@@ -39,12 +39,12 @@ class OrdersController < ApplicationController
         business: User.find(@listing.user_id).email,
         cmd: '_xclick',
         upload: 1,
-        notify_url: 'http://9b2e62ec.ngrok.io/notify',
+        notify_url: 'https://codingo-etsy.herokuapp.com/listings/notify',
         amount: @order.price,
         item_name: @order.name,
         item_number: @order.id,
         quantity: '1',
-        return: 'http://9b2e62ec.ngrok.io/purchases'
+        return: 'https://codingo-etsy.herokuapp.com/listings/purchases'
       }
 
       redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
