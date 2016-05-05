@@ -16,18 +16,18 @@
     <%= f.file_field :image, class: "form-control" %> 
   </div> 
   <div class="form-group"> 
-    <%= f.label :name %> 
+    <%= f.label :상품명 %> 
     <%= f.text_field :name, class: "form-control" %> 
   </div> 
   <div class="form-group"> 
-    <%= f.label :description %> 
+    <%= f.label :내용 %> 
     <%= f.text_area :description, class: "form-control" %> 
   </div> 
   <div class="form-group"> 
-    <%= f.label :price %> 
+    <%= f.label :가격 %> 
     <%= f.text_field :price, class: "form-control" %> 
   </div> 
   <div class="form-group"> 
-    <%= f.submit class:"btn btn-primary" %> 
+    <%= f.submit "상품 추가", class:"btn btn-primary" %> 
   </div>
 <% end %>

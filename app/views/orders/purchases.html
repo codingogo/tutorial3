@@ -1,0 +1,35 @@
+<div class="center">
+  <h2>구입 내역</h2>
+</div>
+
+<table class="table table-striped table-bordered">
+  <tr>
+    <th class="center">사진</th>
+    <th class="center">상품</th>
+    <th class="center">가격</th>
+    <th class="center">판매자</th>
+    <th class="center">구입 날짜 </th>
+  </tr>
+
+  <% @orders.each do |order| %>
+    <tr>
+      <td class="center"><%= image_tag order.listing.image_url %></td>
+      <td class="center"><%= order.listing.name %></td>
+      <td class="center"><%= number_to_currency(order.listing.price) %></td>
+      <td class="center">
+      <% if order.seller_id == nil %>
+        <%= "not defined" %>
+      <% else %>
+        <%= order.seller.name %>
+      <% end %>
+      </td>
+      <td class="center"><%= order.created_at.strftime("%B %-d, %Y") %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
+
+<% if user_signed_in? %>
+  <%= link_to 'New Listing', new_listing_path, class: "btn btn-link" %>
+<% end %>

@@ -20,7 +20,9 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
+    # @order = Order.new(order_params)
+    @order = current_user.orders.create(order_params)
+
     @listing = Listing.find(params[:listing_id])
     @seller = @listing.user 
 
@@ -31,7 +33,7 @@ class OrdersController < ApplicationController
     @order.name = @listing.name
 
     # Paypal Payment Start
-    if @order
+    if @order.save
       # send request to paypal
       values = {
         business: User.find(@listing.user_id).email,
@@ -47,18 +49,18 @@ class OrdersController < ApplicationController
 
       redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
     else
-      respond_to { render action: 'new'}
-      respond_to { render json: @order.errors, status: :unprocessable_entity}
+      redirect_to @order, alert: "Something went wrong..."
     end
+
   end
 
   protect_from_forgery except: [:notify]
   def notify 
+# binding.pry
     params.permit!
     status = params[:payment_status]
 
     order = Order.find(params[:item_number])
-
     if status = "Completed"
       order.update_attributes status: true
     else
@@ -68,10 +70,11 @@ class OrdersController < ApplicationController
     render nothing: true
   end
 
-  protect_from_forgery except: [:purchases]
-  def purchases
-    binding.pry
-    @orders = current_user.orders.where("status = ?", true)
+  protect_from_forgery except: [:your_orders]
+  def your_orders
+   
+    # @orders = current_user.orders.where("status = ?", true)
+    @orders = Order.all.where(buyer: current_user).order("created_at DESC")
   end
 
   private
