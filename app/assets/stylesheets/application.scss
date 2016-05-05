@@ -24,7 +24,11 @@ body {
 }
 .navbar-default .navbar-nav > li > a { font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; color: #0192B5; }
 .col-md-3:nth-child(4n+1) { clear: left; }
-.caption { h3 { font-size: 17px; margin: 2px; } p { font-size: 15px; margin: 0px; } }
+.caption {
+	min-height: 170px;
+	h3 { font-size: 17px; margin: 2px; } 
+	p { font-size: 15px; margin: 0px; } 
+}
 .jumbotron { background-image: url('jumbotron.jpg'); }
 .white {
   color: white;

@@ -14,13 +14,13 @@ gem 'carrierwave'
 gem 'fog'
 gem 'figaro'
 gem 'devise'
-gem 'stripe'
 gem 'mini_magick'
 
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'pry'
 end
 
 group :production do

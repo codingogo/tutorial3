@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   get 'purchases' => 'orders#purchases'
 
   root 'listings#index'
+
+  post 'notify' => 'orders#notify'
+  post 'purchases' => 'orders#purchases'
 end

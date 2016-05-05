@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:notify]
 
   def sales 
     @orders = Order.all.where(seller: current_user).order("created_at DESC")
@@ -27,30 +27,51 @@ class OrdersController < ApplicationController
     @order.listing_id = @listing.id
     @order.buyer_id = current_user.id
     @order.seller_id = @seller.id
+    @order.price = @listing.price
+    @order.name = @listing.name
 
-    Stripe.api_key = ENV["STRIPE_API_KEY"]
-    token = params[:stripeToken]
+    # Paypal Payment Start
+    if @order
+      # send request to paypal
+      values = {
+        business: User.find(@listing.user_id).email,
+        cmd: '_xclick',
+        upload: 1,
+        notify_url: 'http://9b2e62ec.ngrok.io/notify',
+        amount: @order.price,
+        item_name: @order.name,
+        item_number: @order.id,
+        quantity: '1',
+        return: 'http://9b2e62ec.ngrok.io/purchases'
+      }
 
-    begin 
-      charge = Stripe::Charge.create( 
-        :amount => (@listing.price * 100).floor, 
-        :currency => "krw",
-        :card => token 
-        ) 
-      flash[:notice] = "Thanks for ordering!" 
-    rescue Stripe::CardError => e 
-      flash[:danger] = e.message 
+      redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+    else
+      respond_to { render action: 'new'}
+      respond_to { render json: @order.errors, status: :unprocessable_entity}
+    end
+  end
+
+  protect_from_forgery except: [:notify]
+  def notify 
+    params.permit!
+    status = params[:payment_status]
+
+    order = Order.find(params[:item_number])
+
+    if status = "Completed"
+      order.update_attributes status: true
+    else
+      order.destroy
     end
 
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to root_url, notice: '성공적으로 주문하였습니다.' }
-        format.json { render action: 'show', status: :created, location: @order }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
-    end
+    render nothing: true
+  end
+
+  protect_from_forgery except: [:purchases]
+  def purchases
+    binding.pry
+    @orders = current_user.orders.where("status = ?", true)
   end
 
   private

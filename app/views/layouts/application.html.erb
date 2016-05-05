@@ -4,9 +4,8 @@
   <title>Etsy</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag "https://js.stripe.com/v2/" %>
   <%= csrf_meta_tags %>
-  <%= tag :meta, :name => "stripe-key", :content => ENV["STRIPE_PUBLIC_KEY"] %>
+
 </head>
 <nav class="navbar navbar-default" role="navigation"> 
   <!-- Brand and toggle get grouped for better mobile display --><div class="navbar-header"> 
@@ -27,7 +26,7 @@
         <li><%= link_to "상품 관리", seller_path %></li>
         <li><%= link_to "판매내역", sales_path %></li>
         <li><%= link_to "구매내역", purchases_path %></li>
-        <li><%= link_to "프로파일 ", edit_user_registration_path %></li>
+        <li><%= link_to "프로파일", edit_user_registration_path %></li>
         <li><%= link_to "나가기 ", destroy_user_session_path, method: :delete %></li>
       <% else %>
         <li><%= link_to "회원가입", new_user_registration_path %></li>
