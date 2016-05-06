@@ -12,7 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'carrierwave'
-gem 'fog'
+gem "fog-aws"
 gem 'figaro'
 gem 'devise'
 gem 'mini_magick'
