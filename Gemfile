@@ -22,6 +22,8 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'pry'
+  gem 'better_errors'
+  gem 'meta_request'
 end
 
 group :production do
