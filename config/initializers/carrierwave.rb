@@ -1,6 +1,6 @@
 CarrierWave.configure do |config|
   config.storage = :aws
-  config.aws_bucket = EV.fetche('S3_BUCKET_NAME')
+  config.aws_bucket = EV.fetch('S3_BUCKET_NAME')
   config.aws_acl = 'public-read'
 
   config.aws_credentials = {
