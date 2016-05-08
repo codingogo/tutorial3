@@ -11,7 +11,7 @@
     <td><%= image_tag listing.image_url %></td> 
     <td><%= listing.name %></td> 
     <td><%= listing.description %></td> 
-    <td><%= number_to_currency(listing.price) %></td> 
+    <td><%= number_to_currency(listing.price, unit: "W") %></td> 
     <td> 
       <%= link_to "보기", listing, class: "btn btn-link" %> 
       <%= link_to "편집", edit_listing_path(listing), class: "btn btn-link" %> 

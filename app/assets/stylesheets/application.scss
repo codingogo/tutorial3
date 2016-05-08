@@ -17,22 +17,54 @@
 body { 
   background-color: #F5F5F1; 
   color: #333333; 
-  font-family: Arial, Helvetica, sans-serif; 
+  font-family: Arial, Helvetica, sans-serif;
 }
 .center {
   text-align: center;
 }
-.navbar-default .navbar-nav > li > a { font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; color: #0192B5; }
+.right {
+  text-align: right;
+}
+.left {
+  text-align: left;
+}
+.main {
+  min-height: 500px;
+}
+.navbar {
+  margin-bottom: 0px;
+}
+.navbar-default .navbar-brand {
+  color: tomato;
+  text-shadow: 1px 1px 1px #999;
+}
+.navbar-default .navbar-nav > li > a { 
+  font-family: Arial, Helvetica, sans-serif; 
+  font-size: 14px; 
+  font-weight: bold; color: #0192B5; 
+}
 .col-md-3:nth-child(4n+1) { clear: left; }
 .caption {
 	min-height: 170px;
 	h3 { font-size: 17px; margin: 2px; } 
 	p { font-size: 15px; margin: 0px; } 
 }
-.jumbotron { background-image: url('https://s3.ap-northeast-2.amazonaws.com/etsytest/main.jpg'); }
+.jumbotron { 
+  background-image: url('https://s3.ap-northeast-2.amazonaws.com/etsytest/main.jpg'); 
+  min-height: 400px;
+}
 .white {
   color: white;
 }
 .shadow-text {
   text-shadow: 1px 1px 1px #000;
+}
+.footer {
+  color: #fff;
+  background-color: #a3a8a3;
+  min-height: 300px;
+  padding: 20px 60px;
+  a {
+    color: #eee;
+  }
 }
