@@ -8846,7 +8846,7 @@ body {
 
 /* line 33, /Users/gafrong/Development/etsy/app/assets/stylesheets/application.scss */
 .jumbotron {
-  background-image: url("jumbotron.jpg");
+  background-image: url("https://s3.ap-northeast-2.amazonaws.com/etsytest/main.jpg");
 }
 
 /* line 34, /Users/gafrong/Development/etsy/app/assets/stylesheets/application.scss */
