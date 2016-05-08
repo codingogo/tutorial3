@@ -1,47 +1,49 @@
-<div class="row">
-  <div class="col-md-4">
-    <div class="thumbnail">
-      <%= image_tag @listing.image_url %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="thumbnail">
+        <%= image_tag @listing.image_url %>
+      </div>
+      <h3><%= @listing.name %></h3>
+      <h4><%= number_to_currency(listing.price, unit: "W") %></h4>
     </div>
-    <h3><%= @listing.name %></h3>
-    <h4><%= number_to_currency(listing.price, unit: "W") %></h4>
-  </div>
-  <div class="col-md-8">
-    <%= form_for([@listing, @order]) do |f| %>
-      <% if @order.errors.any? %>
-        <div id="error_explanation" class="alert alert-danger alert-dismissable"> 
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> 
-          <h4><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h4>
+    <div class="col-md-8">
+      <%= form_for([@listing, @order]) do |f| %>
+        <% if @order.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger alert-dismissable"> 
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> 
+            <h4><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h4>
 
-          <ul>
-          <% @order.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
+            <ul>
+            <% @order.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+      
+
+        <div class="form-group">
+          <%= f.label :address %><br>
+          <%= f.text_field :address, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :city %><br>
+          <%= f.text_field :city, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :state %><br>
+          <%= f.text_field :state, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :postcode %><br>
+          <%= f.text_field :postcode, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit "주문 확인", class: "btn btn-success" %>
         </div>
       <% end %>
-    
-
-      <div class="form-group">
-        <%= f.label :address %><br>
-        <%= f.text_field :address, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :city %><br>
-        <%= f.text_field :city, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :state %><br>
-        <%= f.text_field :state, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :postcode %><br>
-        <%= f.text_field :postcode, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <%= f.submit "주문 확인", class: "btn btn-success" %>
-      </div>
-    <% end %>
-  </div>
+    </div>
+  </div>  
 </div>  

@@ -1,24 +1,27 @@
-<table class="table table-striped table-bordered"> 
-  <tr> 
-    <th class="center">사진</th> 
-    <th class="center">상품명</th> 
-    <th class="center">내용</th> 
-    <th class="center">가격</th> 
-    <th class="center">정정</th> 
-  </tr> 
-  <% @listings.each do |listing| %> 
-  <tr> 
-    <td><%= image_tag listing.image_url %></td> 
-    <td><%= listing.name %></td> 
-    <td><%= listing.description %></td> 
-    <td><%= number_to_currency(listing.price, unit: "W") %></td> 
-    <td> 
-      <%= link_to "보기", listing, class: "btn btn-link" %> 
-      <%= link_to "편집", edit_listing_path(listing), class: "btn btn-link" %> 
-      <%= link_to '지우기', listing, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-link" %> 
-    </td> 
-  </tr> 
-  <% end %> 
-</table> <br> 
+<div class="container">
+  <table class="table table-striped table-bordered"> 
+    <tr> 
+      <th class="center">사진</th> 
+      <th class="center">상품명</th> 
+      <th class="center">내용</th> 
+      <th class="center">가격</th> 
+      <th class="center">정정</th> 
+    </tr> 
+    <% @listings.each do |listing| %> 
+    <tr> 
+      <td><%= image_tag listing.image_url %></td> 
+      <td><%= listing.name %></td> 
+      <td><%= listing.description %></td> 
+      <td><%= number_to_currency(listing.price, unit: "W") %></td> 
+      <td> 
+        <%= link_to "보기", listing, class: "btn btn-link" %> 
+        <%= link_to "편집", edit_listing_path(listing), class: "btn btn-link" %> 
+        <%= link_to '지우기', listing, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-link" %> 
+      </td> 
+    </tr> 
+    <% end %> 
+  </table> <br> 
 
-<% if user_signed_in? %> <%= link_to '상품 올리기', new_listing_path, class: "btn btn-link" %> <% end %>
+  <% if user_signed_in? %> <%= link_to '상품 올리기', new_listing_path, class: "btn btn-link" %> <% end %>
+
+</div>  
