@@ -3,7 +3,7 @@ class CreateListings < ActiveRecord::Migration
     create_table :listings do |t|
       t.string :name
       t.text :description
-      t.decimal :price
+      t.integer :price
 
       t.timestamps null: false
     end
