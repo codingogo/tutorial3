@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
     @order.listing_id = @listing.id
     @order.buyer_id = current_user.id
     @order.seller_id = @seller.id
-    @order.price = @listing.price
+    @order.price = @listing.price.to_i
     @order.name = @listing.name
 
     # Paypal Payment Start
