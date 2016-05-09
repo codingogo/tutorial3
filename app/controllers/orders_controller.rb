@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
     @order.listing_id = @listing.id
     @order.buyer_id = current_user.id
     @order.seller_id = @seller.id
-    @order.price = @listing.price.to_i
+    @order.price = @listing.price
     @order.name = @listing.name
 
     # Paypal Payment Start
@@ -39,12 +39,12 @@ class OrdersController < ApplicationController
         business: User.find(@listing.user_id).email,
         cmd: '_xclick',
         upload: 1,
-        notify_url: 'https://codingo-etsy.herokuapp.com/listings/notify',
+        notify_url: 'http://ef5affba.ngrok.io/notify',
         amount: @order.price,
         item_name: @order.name,
         item_number: @order.id,
         quantity: '1',
-        return: 'https://codingo-etsy.herokuapp.com/listings/purchases'
+        return: 'http://ef5affba.ngrok.io/purchases'
       }
 
       redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query

@@ -17,7 +17,7 @@
           <div class="caption"> 
             <h3 class="blue-grey bold"><%= listing.name %></h3>
             <p><%= listing.description %></p>
-            <p><%= listing.price.to_i %>원</p>
+            <p><%= number_to_currency(listing.price) %></p>
             <p class="grey "><%= "판매자: #{listing.user.name}" %></p>
           </div>  
         </div>

@@ -16,7 +16,7 @@
       <tr>
         <td class="center"><%= image_tag order.listing.image_url %></td>
         <td class="center"><%= order.listing.name %></td>
-        <td class="center"><%= order.listing.price.to_i %>원</td>
+        <td class="center"><%= number_to_currency(order.listing.price) %></td>
         <td class="center">
         <% if order.seller_id == nil %>
           <%= "not defined" %>

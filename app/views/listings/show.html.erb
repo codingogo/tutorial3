@@ -7,7 +7,7 @@
     </div> 
     <div class="col-md-6"> 
       <h3><%= @listing.name %></h3> 
-      <p><%= @listing.price.to_i %>원</p> 
+      <p><%= number_to_currency(@listing.price) %></p> 
       <p><%= @listing.description %></p> 
       <br>
       <div class="center">
